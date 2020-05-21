@@ -11,8 +11,7 @@ setuptools.setup(
     description="Django integration for jsform",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    # url="TODO - github repo",
-    # TODO - be sure to include static files
+    url="https://github.com/quadrant-newmedia/jsform",
     packages=['django_jsform'],
     classifiers=[
         "Programming Language :: Python :: 3",
