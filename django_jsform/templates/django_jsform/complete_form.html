@@ -1,0 +1,15 @@
+{# Note - assumes django_jsform/django_jsform.css is in use #}
+
+{% load jsform %}
+
+{# Note - we think our error messages are friendlier than browser default error messages, so we set novalidate #}
+<form novalidate method="POST" class="limited-width-form" target="jsform">{% csrf_token %}
+    <div class="block error" data-form-errors aria-live="polite"></div>
+    <div class="wide-inputs">
+		{% include 'django_jsform/form_fields.html' %}	
+    </div>
+
+	<div class="block">
+		<input type="submit" value="{{submit_button_text|default:'Save'}}">
+	</div>
+</form>

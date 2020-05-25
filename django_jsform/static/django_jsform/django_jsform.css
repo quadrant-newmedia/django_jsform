@@ -1,0 +1,45 @@
+/*
+    django_jsform aims to be fairly independent of your site stylesheets
+
+    There are only a few styles that we expect to be defined, and we've consolidated them here.
+
+    We recommend including this stylesheet before your main stylesheet.
+    Alternatively, just be sure to implement these classes in your own stylesheet.
+
+    Note that we don't use a prefix on our class names - we expect you to use these same classes throughout your project.
+    If these class names clash with class names that you're already using, then you'll have to override the various django_jsform templates to use different class names.
+*/
+
+.block {
+    display: block;
+    margin: 1rem auto;
+}
+
+/* 
+    Note - the error message container has .qnc-error, but we don't toggle .qnc-error on the actual input, we only set [aria-invalid=true]
+*/
+.error {
+    color: red;
+}
+[aria-invalid=true]:not(:focus) {
+    /* This isn't the prettiest, but it works quite well, even for checkbox, radio, etc. */
+    color: red;
+    outline: 1px solid red;
+}
+
+/* A large line-height looks good on a lot of sites. Within a single "form element" (which might include label text, help text, and an input), however, it's best if line height is smaller. */
+.tightlines {
+    line-height: 1.2;
+}
+
+/* Recommended for use with .wide-inputs, so forms don't get too wide on wide monitors */
+.limited-width-form {
+    max-width: 600px;
+}
+/* Make all inputs within a container stretch to the width of the container */
+.wide-inputs textarea,
+.wide-inputs select,
+.wide-inputs input:not([type=checkbox]):not([type=radio]) {
+    box-sizing: border-box;
+    width: 100%;
+}

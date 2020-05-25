@@ -1,0 +1,14 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Test</title>
+    <link rel="stylesheet" type="text/css" href="{% static "django_jsform/django_jsform.css" %}">
+    <script src="{% static "jsform/jsform.js" %}"></script>
+    <script src="{% static "jsform/jsform_execresponse.js" %}"></script>
+    <script src="{% static "jsform/jsform_elementmerge.js" %}"></script>
+</head>
+<body>
+    {% include "django_jsform/complete_form.html" %}
+</body>
+</html>
