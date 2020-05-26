@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="django_jsform",
-    version="1.0.1-alpha1",
+    version="1.0.1-alpha2",
     author="Alex Fischer",
     author_email="alex@quadrant.net",
     description="Django integration for jsform",

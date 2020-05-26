@@ -3,4 +3,5 @@ include RELEASE_NOTES.md
 recursive-include django_jsform *.py
 recursive-include django_jsform/templates *
 recursive-include django_jsform/static *.js
+recursive-include django_jsform/js_helpers *.js
 recursive-include django_jsform/static *.css
