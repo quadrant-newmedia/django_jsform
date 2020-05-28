@@ -1,7 +1,19 @@
 # django_jsform
+Django integration for [jsform](https://github.com/quadrant-newmedia/jsform). In a nutshell, this package:
 
-This project is a thin wrapper around [jsform](https://github.com/quadrant-newmedia/jsform).
+- includes jsform scripts as static files
+- provides a js_response utility module for use with jsform_execresponse
+- provides form-rendering templates which play nicely with jsform_elementmerge
+- provides a suite of tests for jsform
 
-We include jsform's scripts as static files, and provide some basic "javascript responses" for use with jsform_execresponse.js.
+## The Tests
+The tests are all integration tests, and need to be run manually. 
 
-Totally untested. We might end up writing a test suite here, or we might just test features as we use them in other projects.
+`python manage.py runserver`, open '/' in your browser, and follow the instructions on the test pages.
+
+## Project Status
+This project is the next-generation version of some internal tools we've used on previous production Django sites, but has yet to see significant production usage.
+
+## Contact
+If you have any comments or questions about the project, please [create an issue on the issue tracker](https://github.com/quadrant-newmedia/django_jsform/issues).
+

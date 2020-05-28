@@ -21,12 +21,21 @@ def _add_widget_attr(bound_field, name, value):
 
 @register.filter
 def with_error_message_container(bound_field):
+    '''
+        Important: we always generate the error message container, even if empty.
+
+        This is important, because aria-live only works for elements that are initially in the DOM.
+
+        It also makes it easier to add error messages later via js (see how js_response.set_form_errors() works).
+
+        Lastly, jsform_elementmerge.js doesn't work as desired if you have "optional" elements with any subsequent siblings, so it's always best to put them in their own container.
+    '''
     error_message_id = get_errormessage_id(bound_field)
     _add_widget_attr(bound_field, 'aria-errormessage', error_message_id)
     return format_html('''
         {field}
-        <div class="error" aria-live="polite" id="{error_message_id}"></div>
-    ''', field=bound_field, error_message_id=error_message_id)
+        <div class="error" aria-live="polite" id="{error_message_id}">{errors}</div>
+    ''', field=bound_field, error_message_id=error_message_id, errors='. '.join(bound_field.errors))
 
 @register.filter
 def with_widget_attr(bound_field, attr):

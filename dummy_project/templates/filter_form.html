@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>Filter Form</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'django_jsform/django_jsform.css' %}">
+    <script defer src="{% static "jsform/jsform.js" %}"></script>
+    <script defer src="{% static "jsform/jsform_elementmerge.js" %}"></script>
+</head>
+<body>
+    <h1>Filter Form</h1>
+    <p>Note that this page is "reloadable". The form values and search results will be restored on reload or back/forward.</p>
+    <p>Note that submitting the form does not create new history entries. Hitting the back button will always go back to the previous page.</p>
+    <form novalidate target="jsform" replace-query>
+        <div class="wide-inputs">
+            {% include 'django_jsform/form_fields.html' %}  
+        </div>
+        <input type="submit" value="Search">
+    </form>
+
+    {{result|default:''}}
+
+</body>
+</html>

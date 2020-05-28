@@ -1,1 +1,1 @@
-python -Wa manage.py test django_jsform/tests/
+python -Wa manage.py test dummy_project/tests/

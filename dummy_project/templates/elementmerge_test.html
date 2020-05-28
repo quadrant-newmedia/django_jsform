@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>elementmerge test</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'django_jsform/django_jsform.css' %}">
+    <script defer src="{% static "jsform/jsform.js" %}"></script>
+    <script defer src="{% static "jsform/jsform_elementmerge.js" %}"></script>
+</head>
+<body>
+    <p>
+        Note - this page does <b>NOT</b> represent any common/recommended UI pattern. Here we are only testing that elementmerge behaves as expected.
+    </p>
+    <p>
+        Generally, a POST form will not re-render the form after a successful submit. Here we're using POST because we want to verify that file inputs keep their input value.
+    </p>
+
+    <div elementmerge-nomerge id="nomerge">
+    </div>
+    <script>
+        var d = document.getElementById('nomerge');
+        d.style.color = 'green';
+        d.innerText = 'This element has dynamic content and attributes, but it will not be reset by the merge.'
+        d.appendChild(document.createElement('hr'));
+
+        var p = document.createElement('p');
+        p.setAttribute('elementmerge-skip', '');
+        p.innerText = 'This element was added dynamically. Since it has [elementmerge-skip], it will not be deleted.';
+        document.body.appendChild(p);
+    </script>
+
+
+    {% comment %}
+        Django's form.as_p() and form.as_table() do not produce "elementmerge" friendly markup.
+
+        The error messages are rendered into "optional" elements at the same dom-level as the inputs, which causes inputs to be recreated on merge if the presence of error message changes.
+    {% endcomment %}
+    {% include 'django_jsform/complete_form.html' %}  
+
+    <h2>Dynamic Data</h2>
+    <p>The following timestamp should be updated on every submit.</p>
+
+    {{result}}
+
+</body>
+</html>

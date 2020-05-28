@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>jsform tests</title>
+    <script defer src="{% static "jsform/jsform.js" %}"></script>
+    <script defer src="{% static "jsform/jsform_execresponse.js" %}"></script>
+    <script>
+        addEventListener('jsformsubmitted', function(e) {
+            if (e.target.hasAttribute('allow-duplicate-submissions')) {
+                e.target.removeAttribute('block-submissions');
+            }
+        });
+    </script>
+    <style>
+        [block-submissions] {
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <h1>jsform tests</h1>
+    <h2>Normal Form</h2>
+    <form action="/does_not_exist/">
+        <p>This form does NOT have <code>target="jsform"</code>. Clicking the submit button should submit normally, trying to load a page which doesn't exist. <br>
+        <input type="submit" value="Submit">
+        </p>
+    </form>
+
+    <h2>Submission Blocking</h2>
+    <form target="jsform">
+        <p>
+            This form (like most on this page) can only be submitted once. <br>
+            <input type="submit" value="Submit">
+        </p>
+    </form>
+    <!-- Note - clear attribute after timeout, so that jsform runs first (we need to wait until it adds the attribute) -->
+    <form target="jsform" allow-duplicate-submissions>
+        <p>
+            This form clears the <code>block-submissions</code> attribute, so it can be submitted more than once. <br>
+            <input type="submit" value="Submit">
+        </p>
+    </form>
+
+    <h2>Network Error</h2>
+    <form action="http://fakedomain.afhaghafakljfhaakfh.com" target="jsform">
+        Server in action does not exist. Default handling of network should alert(). <br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <h2>Network Error, Custom Listener</h2>
+    <form id="networkerrorlistener" action="http://fakedomain.afhaghafakljfhaakfh.com" target="jsform">
+        Should alert "Custom Network Error Message", and default alert should be suppressed. <br>
+        <input type="submit" value="Submit">
+    </form>
+    <script>
+        document.getElementById('networkerrorlistener').addEventListener('jsformnetworkerror', function(e) {
+            e.preventDefault();
+            alert('Custom Network Error Message');
+        });
+    </script>
+
+    <h2>HTTP Status Error</h2>
+    <form action="/does_not_exist/" target="jsform">
+        Should alert "Submission Error: 404 Not Found". <br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <h2>HTTP Status Error, Custom Listener</h2>
+    <form id="statuserrorlistener" action="/does_not_exist/" target="jsform">
+        Should alert the XMLHttpRequest object, and the default alert should be suppressed. <br>
+        <input type="submit" value="Submit">
+    </form>
+    <script>
+        document.getElementById('statuserrorlistener').addEventListener('jsformerror', function(e) {
+            e.preventDefault();
+            alert(e.detail);
+        });
+    </script>
+
+    <h2>Success</h2>
+    <form target="jsform">
+        Should alert "Submission complete: 200 OK". <br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <h2>Succcess, Custom Listener</h2>
+    <form id="successlistener" target="jsform">
+        Should alert the html source of this page, default alert should be suppressed. <br>
+        <input type="submit" value="Submit">
+    </form>
+    <script>
+        document.getElementById('successlistener').addEventListener('jsformsuccess', function(e) {
+            e.preventDefault();
+            alert(e.detail.responseText);
+        });
+    </script>
+
+    <h2>GET Serialization</h2>
+    <p>Submit the form, without making any changes. Should alert a success message.</p>
+    <form novalidate allow-duplicate-submissions target="jsform" action='/verify_simple_form/'>
+        <table>
+            {{simple_form.as_table}}
+        </table>
+        <input type="submit" name="Submit">
+    </form>
+
+    <h2>POST Serialization</h2>
+    <p>Submit the form, without making any changes. Should alert a success message.</p>
+    <form method="POST" novalidate allow-duplicate-submissions target="jsform" action='/verify_simple_form/'>{% csrf_token %}
+        <table>
+            {{simple_form.as_table}}
+        </table>
+        <input type="submit" name="Submit">
+    </form>
+        
+    <h2>File Upload</h2>
+    <p>The form should correctly summarize the details of the uploaded files.</p>
+    <p>Try with no files, one file, and multiple files.</p>
+    <form method="POST" target="jsform" allow-duplicate-submissions action="/verify_files/">{% csrf_token %}
+        <input type="file" multiple name="files"><br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <h2>Submit Button</h2>
+    <p>Here we verify that the "submitting button" gets serialized, and that no others do. You should select the second button in each test. Each submission should alert a success response.</p>
+
+    <p>Try clicking the second button, and also activating it by keyboard.</p>
+    <form target="jsform" allow-duplicate-submissions action="/verify_submit_button/">{% csrf_token %}
+        <button type="submit" name="A" value="buttonA">A (button)</button>
+        <button type="submit" name="B" value="buttonB">B (button)</button>
+        <button type="submit" name="C" value="buttonA">C (button)</button>
+    </form>
+
+    <p>And now with input elements.</p>
+    <form target="jsform" allow-duplicate-submissions action="/verify_submit_button/">{% csrf_token %}
+        <input type="submit" name="A" value="buttonA">
+        <input type="submit" name="B" value="buttonB">
+        <input type="submit" name="C" value="buttonA">
+    </form>
+
+    <p>And now with POST.</p>
+    <form target="jsform" allow-duplicate-submissions action="/verify_submit_button/" method="POST">{% csrf_token %}
+        <button type="submit" name="A" value="buttonA">A (button)</button>
+        <button type="submit" name="B" value="buttonB">B (button)</button>
+        <button type="submit" name="C" value="buttonA">C (button)</button>
+    </form>    
+
+    <h2>replace-query</h2>
+    <form novalidate allow-duplicate-submissions target="jsform" replace-query>
+        <p>The url should be updated with the form data on every submit. No history entry will be created. You can submit multiple times, and your back button will still take you to the previous page.</p>
+        <input type="text" name="data" value="foobar"><br>
+        <input type="submit" name="Submit">
+    </form>
+
+</body>
+</html>

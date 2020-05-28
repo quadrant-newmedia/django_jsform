@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>jsform_execresponse tests</title>
+    <script defer src="{% static "jsform/jsform.js" %}"></script>
+    <script defer src="{% static "jsform/jsform_execresponse.js" %}"></script>
+    <style>
+        [block-submissions] {
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <h1>jsform_execresponse tests</h1>
+    <h2>Non-javascript Response</h2>
+    <p>This should alert the basic success message.</p>
+    <form target="jsform">
+        <input type="submit">
+    </form>
+
+    <h2>alert()</h2>
+    <p>This should alert "Hooray!", and you can only submit once.</p>
+    <form target="jsform">
+        <button type="submit" name="ACTION" value="ALERT">Submit</button>
+    </form>
+
+    <h2>alert() Multiple</h2>
+    <p>This should alert "Hooray!", and you can submit multiple times.</p>
+    <form target="jsform">
+        <button type="submit" name="ACTION" value="ALERT_MULTIPLE">Submit</button>
+    </form>
+
+    <h2>back()</h2>
+    <p>This should cause your browser to go back.</p>
+    <form target="jsform">
+        <button type="submit" name="ACTION" value="BACK">Submit</button>
+    </form>
+
+
+</body>
+</html>

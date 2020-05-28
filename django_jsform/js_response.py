@@ -17,7 +17,27 @@ def go_back():
     '''
         This is our recommend response for "Edit" form pages.
         Use with some means of "stale page detection" to trigger the previous page to reload.
+
+        We officially endorse NavTricks.js for "smart back" behaviour.
+        https://github.com/quadrant-newmedia/NavTricks
+
+        TODO - add backOrUp([internal_hosts]) function to NavTricks?
     '''
+    return js_response(f'''
+        if (window.NavTricks) {{
+            if (NavTricks.previousPageIsInternal()) {{
+                NavTricks.returnToPreviousPage()
+            }}
+            else {{
+                NavTricks.withParentPage(function(p) {{
+                    location = p.path
+                }})
+            }}
+        }}
+        else {{
+            history.back();
+        }}
+    ''')
     return js_response('history.back()')
 def go_to(url):
     '''
@@ -38,11 +58,11 @@ def replace_location(url):
         }}
     ''')
 
-def alert(message):
+def alert(message, allow_further_submissions=False):
     '''
         Useful for error messages that aren't really typical form error messages, or for actions that are triggered by a simple button push (where there is no corresponding container for error messages).
     '''
-    return js_response(f'alert({d(message)})')
+    return js_response(f'alert({d(message)}); return {d(allow_further_submissions)}')
 
 def _get_script_content(script_name):
     with open(os.path.join(os.path.dirname(__file__), 'js_helpers', script_name)) as f :
