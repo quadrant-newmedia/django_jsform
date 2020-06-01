@@ -42,6 +42,11 @@
         </p>
     </form>
 
+    <h2>Programmatic Submit</h2>
+    <form target="jsform">
+        <p><code>form.submit()</code> still uses jsform. <br><button type="button" onclick="this.form.submit()">Verify</button></p>
+    </form>
+
     <h2>Network Error</h2>
     <form action="http://fakedomain.afhaghafakljfhaakfh.com" target="jsform">
         Server in action does not exist. Default handling of network should alert(). <br>

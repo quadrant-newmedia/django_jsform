@@ -1,4 +1,7 @@
-# 2.1.0
+### 2.1.1
+Fixed several IE bugs.
+
+## 2.1.0
 Added inline event handler support.
 
 # 2.0.0
