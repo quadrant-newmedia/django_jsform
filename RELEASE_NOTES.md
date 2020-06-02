@@ -1,3 +1,8 @@
+### 2.2.0
+`jsform_execresponse` now handles `jsformerror` events in addition to `jsformsuccess`.
+
+`js_response.set_form_errors()` now returns a 400 status code by default. This means you can use this response to handle form errors, and return a simple HttpResponse() for successful forms (letting a custom inline handler define what to do for successful form submissions).
+
 ### 2.1.1
 Fixed several IE bugs.
 

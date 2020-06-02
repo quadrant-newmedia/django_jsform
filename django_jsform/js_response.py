@@ -93,17 +93,21 @@ def clear_form_errors():
         clear_form_errors(form); 
         return true
     ''')
-def set_form_errors(form):
+def set_form_errors(form, status_code=400):
     return set_raw_form_errors(
         form.non_field_errors(), 
-        {get_errormessage_id(field): field.errors for field in form}
+        {get_errormessage_id(field): field.errors for field in form},
+        status_code,
     )
-def set_raw_form_errors(form_errors, error_map):
-    return js_response(f'''
+def set_raw_form_errors(form_errors, error_map, status_code=400):
+    r = js_response(f'''
         {_get_script_content("set_form_errors.js")};
         set_form_errors(form, {d(form_errors)}, {d(error_map)});
         return true
     ''')
+    r.status_code = status_code
+    return r
+
 def reset_form():js_response(f'''
         {_get_script_content("js_helpers/clear_form_errors.js")};
         clear_form_errors(form); 

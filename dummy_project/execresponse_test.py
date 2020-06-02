@@ -15,5 +15,9 @@ def execresponse_test(request):
         return js_response.alert('Hooray!', True)
     if action == 'BACK':
         return js_response.go_back()
+    if action == 'ALERT_400':
+        r = js_response.alert('Custom message with non 2XX response')
+        r.status_code = 400
+        return r
 
     return http.HttpResponseBadRequest()
