@@ -95,6 +95,12 @@
         <input type="submit" value="Submit">
     </form>
 
+    <h2>Inline Handler - This and Return False</h2>
+    <form target="jsform" onjsformsuccess="alert(this); return false;">
+        Should alert the form element, default alert should be suppressed. <br>
+        <input type="submit" value="Submit">
+    </form>
+    
     <h2>GET Serialization</h2>
     <p>Submit the form, without making any changes. Should alert a success message.</p>
     <p>Then make some changes and submit form. Should alert an error message.</p>
