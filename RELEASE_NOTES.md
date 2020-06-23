@@ -1,3 +1,6 @@
+# 3.0.0
+`element_merge.js` now merges the `head`, as well as the `body`. Set `elementmerge-nomerge` on the `head` if you want to retain old behaviour.
+
 ## 2.3.0
 Templates now set `aria-invalid="true"` when rendering invalid form inputs (`set_form_errors.js` always did this, and `django_jsform.css` depends on it for styling).
 

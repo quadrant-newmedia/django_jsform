@@ -2,7 +2,7 @@
 {% load static %}
 <html>
 <head>
-    <title>elementmerge test</title>
+    <title>elementmerge test {{result}}</title>
     <link rel="stylesheet" type="text/css" href="{% static 'django_jsform/django_jsform.css' %}">
     <script defer src="{% static "jsform/jsform.js" %}"></script>
     <script defer src="{% static "jsform/jsform_elementmerge.js" %}"></script>
@@ -39,8 +39,9 @@
 
     <h2>Dynamic Data</h2>
     <p>The following timestamp should be updated on every submit.</p>
-
     {{result}}
+
+    <p>Also, this document's <code>title</code> has a dynamic timestamp, and you should see it update on every submission.</p>
 
 </body>
 </html>
