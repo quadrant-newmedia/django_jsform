@@ -1,3 +1,6 @@
+## 2.3.0
+Templates now set `aria-invalid="true"` when rendering invalid form inputs (`set_form_errors.js` always did this, and `django_jsform.css` depends on it for styling).
+
 ### 2.2.1
 Set proper `this` inside inline event handlers.
 

@@ -32,6 +32,8 @@ def with_error_message_container(bound_field):
     '''
     error_message_id = get_errormessage_id(bound_field)
     _add_widget_attr(bound_field, 'aria-errormessage', error_message_id)
+    if bound_field.errors :
+        _add_widget_attr(bound_field, 'aria-invalid', 'true')
     return format_html('''
         {field}
         <div class="error" aria-live="polite" id="{error_message_id}">{errors}</div>
