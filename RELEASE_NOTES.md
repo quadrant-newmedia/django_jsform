@@ -1,3 +1,6 @@
+### 2.2.2
+Drop usage of NavTricks in `js_response.replace_location()`, since NavTricks's implementation of `replaceCurrentPage` never worked right, and has been dropped in recent versions.
+
 ### 2.2.1
 Set proper `this` inside inline event handlers.
 

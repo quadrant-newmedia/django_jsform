@@ -46,16 +46,10 @@ def go_to(url):
     return js_response(f'location = {d(url)}')
 def replace_location(url):
     '''
-        We officially endorse NavTricks.js
-        https://github.com/quadrant-newmedia/NavTricks
+        NOT RECOMMENDED. 
     '''
     return js_response(f'''
-        if (window.NavTricks) {{
-            NavTricks.replaceCurrentPage({d(url)});
-        }}
-        else {{
-            location.replace({d(url)});
-        }}
+        location.replace({d(url)});
     ''')
 
 def alert(message, allow_further_submissions=False):
