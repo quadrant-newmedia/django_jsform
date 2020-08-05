@@ -28,5 +28,5 @@ def get_form(request):
 def elementmerge_test(request):
     return TemplateResponse(request, 'elementmerge_test.html', dict(
         form=get_form(request),
-        result=time.time()
+        result=time.time(),
     ))

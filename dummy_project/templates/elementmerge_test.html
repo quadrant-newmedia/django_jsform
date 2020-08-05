@@ -42,5 +42,14 @@
 
     {{result}}
 
+    <h2>Element Merge Whitelist</h2>
+    <p>If you <button onclick='elementmerge.merge_from("?whitelist=true");'>click this button</button>, only the two timestamps below will update:</p>
+    <p id='whitelist-1' {% if request.GET.whitelist %}elementmerge-whitelist{% endif %}>{{result}}</p>
+    <p id='whitelist-2' {% if request.GET.whitelist %}elementmerge-whitelist{% endif %}>{{result}}</p>
+    <p {% if request.GET.whitelist %}elementmerge-whitelist{% endif %}>{{result}}</p>
+    <form target=jsform onjsformsubmitted="this.removeAttribute('block-submissions');">
+        <button type=submit name=whitelist value=true>You can also submit test by submitting this form.</button>
+    </form>
+
 </body>
 </html>
