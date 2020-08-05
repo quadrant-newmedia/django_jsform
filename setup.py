@@ -14,7 +14,7 @@ setuptools.setup(
     description="Django integration for jsform",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/quadrant-newmedia/jsform",
+    url="https://github.com/quadrant-newmedia/django_jsform",
     packages=['django_jsform'],
     classifiers=[
         "Programming Language :: Python :: 3",
