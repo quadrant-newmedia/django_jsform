@@ -1,3 +1,6 @@
+# 3.1.1
+`elementmerge.reload()` bug fix - keep query string
+
 # 3.1.0
 `jsform_elementmerge.js` enhancements - `[elementmerge-whitelist]` directive, and global `elementmerge` object for usage without `jsform.js`. See README for jsform for details.
 
