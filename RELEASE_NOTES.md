@@ -1,3 +1,6 @@
+# 3.1.2
+Bug fix in elementmerge - ensure that multiple consecutive nodes will be deleted if not present in new DOM (previously it would only delete the first removed node).
+
 # 3.1.1
 `elementmerge.reload()` bug fix - keep query string
 

@@ -52,5 +52,14 @@
         <button type=submit name=whitelist value=true>You can also submit test by submitting this form.</button>
     </form>
 
+    <h3>Deleting Removed Elements</h3>
+    <template id="delete-template">
+        <p>This element was added dynamically.</p>
+        <p>So was this one. Both should be deleted when you merge the page.</p>
+    </template>
+    <div id="delete-container"></div>
+    <script>
+        document.getElementById('delete-container').appendChild(document.getElementById('delete-template').content);
+    </script>
 </body>
 </html>
