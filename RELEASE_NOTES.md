@@ -1,3 +1,6 @@
+# 3.1.3
+Bug fix - handle the case where form controls have names that clash with js form attributes. Still don't properly handle the case where a control has name "elements", but at least throw a meaningful error.
+
 # 3.1.2
 Bug fix in elementmerge - ensure that multiple consecutive nodes will be deleted if not present in new DOM (previously it would only delete the first removed node).
 

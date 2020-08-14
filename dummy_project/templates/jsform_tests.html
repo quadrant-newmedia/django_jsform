@@ -159,5 +159,24 @@
         <input type="submit" name="Submit">
     </form>
 
+    <h2>Form Attribute Masking Elements</h2>
+    <p>This form has (hidden) elements masking important form attributes ("target", "action", and "method", "dispatchEvent").</p>
+    <p>It should alert a success message on submission.</p>
+    <form target="jsform" action="/verify_attrs/" method="POST">{% csrf_token %}
+        <input type="hidden" name="target" value="_blank">
+        <input type="hidden" name="method" value="GET">
+        <input type="hidden" name="action" value="/fake_endpoint/">
+        <input type="hidden" name="dispatchEvent" value="foo">
+        <input type="submit" value="Submit">
+        <button type="button" onclick="this.form.submit();">Programmatic Submit Should Also Work</button>
+    </form>
+
+    <h2>Form With Input Named "elements"</h2>
+    <p>This form has an input named "elements". We can't handle this properly (for GET requests), so throw an error with a meaningful message. Try submitting the form, and ensure the console has an appropriate message.</p>
+    <p>It should alert a success message on submission.</p>
+    <form target="jsform">{% csrf_token %}
+        <input type="hidden" name="elements" value="foo">
+        <input type="submit" value="Submit">
+    </form>
 </body>
 </html>
