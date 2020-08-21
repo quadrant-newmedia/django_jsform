@@ -1,0 +1,15 @@
+{% load jsform %}
+<label>
+    {{field|with_error_attributes}} 
+    {# Checkboxes are almost never required, so we don't bother with "(optional)" text, but we still follow the convention of bold labels for required inputs #}
+    {% if field.field.required %}
+        <b>{{field.label}}</b>
+    {% else %}
+        {{field.label}}
+    {% endif %}
+
+    {% if field.help_text %}
+    <br><small>{{field.help_text}}</small>
+    {% endif %}
+</label>
+{{field|error_message_container}}

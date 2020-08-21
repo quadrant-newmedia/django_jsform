@@ -1,7 +1,7 @@
 import json
 import time
 
-from django import template
+from django import forms, template
 from django.conf import settings
 from django.shortcuts import resolve_url
 from django.utils.html import format_html
@@ -20,7 +20,31 @@ def _add_widget_attr(bound_field, name, value):
     bound_field.as_widget = as_widget
 
 @register.filter
+def is_single_checkbox(bound_field):
+    return isinstance(bound_field.field, forms.BooleanField)
+
+@register.filter
 def with_error_message_container(bound_field):
+    return format_html('''
+        {field}
+        {error_message_container}
+    ''', field=with_error_attributes(bound_field), error_message_container=error_message_container(bound_field))
+
+@register.filter
+def with_error_attributes(bound_field):
+    '''
+        Can be used (in conjunction with error_message_container) when with_error_message_container is not flexible enough.
+
+        See how form_fields.html uses this to render checkboxes.
+    '''
+    error_message_id = get_errormessage_id(bound_field)
+    bound_field._error_message_id = error_message_id
+    _add_widget_attr(bound_field, 'aria-errormessage', error_message_id)
+    if bound_field.errors :
+        _add_widget_attr(bound_field, 'aria-invalid', 'true')
+    return bound_field
+@register.filter
+def error_message_container(bound_field):
     '''
         Important: we always generate the error message container, even if empty.
 
@@ -30,14 +54,13 @@ def with_error_message_container(bound_field):
 
         Lastly, jsform_elementmerge.js doesn't work as desired if you have "optional" elements with any subsequent siblings, so it's always best to put them in their own container.
     '''
-    error_message_id = get_errormessage_id(bound_field)
-    _add_widget_attr(bound_field, 'aria-errormessage', error_message_id)
-    if bound_field.errors :
-        _add_widget_attr(bound_field, 'aria-invalid', 'true')
-    return format_html('''
-        {field}
+    try :
+        error_message_id = bound_field._error_message_id
+    except AttributeError :
+        raise Exception('You must call "with_error_attributes(bound_field)" on the bound field before you call this function (or the field won\'t be rendered with the correct attributes to link it to this error message container')
+    return format_html('''\
         <div class="error" aria-live="polite" id="{error_message_id}">{errors}</div>
-    ''', field=bound_field, error_message_id=error_message_id, errors='. '.join(bound_field.errors))
+    ''', error_message_id=error_message_id, errors='. '.join(bound_field.errors))
 
 @register.filter
 def with_widget_attr(bound_field, attr):

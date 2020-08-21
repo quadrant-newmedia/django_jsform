@@ -1,3 +1,6 @@
+# 3.2.0
+Better template generation for single checkboxes
+
 # 3.1.3
 Bug fix - handle the case where form controls have names that clash with js form attributes. Still don't properly handle the case where a control has name "elements", but at least throw a meaningful error.
 
