@@ -1,0 +1,13 @@
+{% load jsform %}
+<label style="display: block;">
+    {% if field.field.required %}
+        <b>{{field.label}}:</b>
+    {% else %}
+        {{field.label}} <small>(optional)</small>:
+    {% endif %}
+    {{field|with_error_attributes}} 
+    {% if field.help_text %}
+    <br><small>{{field.help_text}}</small>
+    {% endif %}
+    {{field|error_message_container}}
+</label>

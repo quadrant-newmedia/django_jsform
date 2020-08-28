@@ -1,3 +1,5 @@
+## 3.4.0
+Added new template ("inline_field.html") for rendering fields in one line
 
 ## 3.3.0
 Updated jsform.js - add more properties to `jsformsuccess` and `jsformerror` events.
