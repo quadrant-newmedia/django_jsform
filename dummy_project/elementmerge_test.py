@@ -16,6 +16,7 @@ class Form(forms.Form):
     select = forms.ChoiceField(choices=choices)
     radio = forms.ChoiceField(widget=forms.RadioSelect, choices=choices)
     checkboxes = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=choices)
+    single_checkbox = forms.BooleanField(help_text='Something something', required=False)
     file = forms.FileField()
 
 def get_form(request):

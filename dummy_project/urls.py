@@ -7,12 +7,14 @@ from .form_test_view import FormTestView
 from . import simple_form
 from .verify_files import verify_files
 from .verify_submit_button import verify_submit_button
-
 from .execresponse_test import execresponse_test
-
 from .elementmerge_test import elementmerge_test
 
 from .filter_form import filter_form
+
+def import_view(module, view_name='view', package_name=__package__):
+    from importlib import import_module
+    return getattr(import_module(module, package_name), view_name)
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name='index.html')),
@@ -33,4 +35,5 @@ urlpatterns = [
     path('elementmerge_tests/', elementmerge_test),
 
     path('filter_form/', filter_form),
+    path('verify_attrs/', import_view('.verify_attrs')),
 ]
