@@ -1,3 +1,6 @@
+## 3.5.0
+js_response module now generates responses which can be added together
+
 ## 3.4.0
 Added new template ("inline_field.html") for rendering fields in one line
 
