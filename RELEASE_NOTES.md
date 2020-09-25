@@ -1,5 +1,8 @@
-### 3.5.1
+### 3.5.2
 elementmerge - don't `setAttribute()` if unchanged - was causing stylesheets to unapplied/reapplied, causing FOUC
+
+### 3.5.1 
+broken update - forgot to commit submodule
 
 ## 3.5.0
 js_response module now generates responses which can be added together
