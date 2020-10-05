@@ -56,10 +56,30 @@
     <template id="delete-template">
         <p>This element was added dynamically.</p>
         <p>So was this one. Both should be deleted when you merge the page.</p>
+        <button onclick="elementmerge.reload()">Merge</button>
     </template>
     <div id="delete-container"></div>
     <script>
         document.getElementById('delete-container').appendChild(document.getElementById('delete-template').content);
     </script>
+
+    <h3>Custom Merge Options</h3>
+    <p>Last merge: {{result}}</p>
+    <p id="custom-merge-whitelist">A: {{result}}</p>
+    <template id="custom-merge-options">
+        <p id='custom-merge-added'>B: This element was added dynamically.</p>
+    </template>
+    <div id="custom-merge-container"></div>
+    <script>
+        document.getElementById('custom-merge-container').appendChild(document.getElementById('custom-merge-options').content);
+    </script>
+    <p>{{result}}</p>
+    <div>
+        <button onclick="elementmerge.reload({whitelist: '#custom-merge-whitelist'})">Merge, with custom whitelist (only timestamp A above should update)</button><br>
+        <button onclick="elementmerge.reload({nomerge: '#custom-merge-whitelist', skip: '#custom-merge-added'})">Merge, nomerge A, skip B</button><br>
+        <button onclick="elementmerge.reload();">Merge normal</button>
+    </div>
+
+
 </body>
 </html>

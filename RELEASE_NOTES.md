@@ -1,16 +1,19 @@
-# 3.2.0
+## 3.3.0
+Add means of passing custom selectors to elementmerge.
+
+## 3.2.0
 Better template generation for single checkboxes
 
-# 3.1.3
+### 3.1.3
 Bug fix - handle the case where form controls have names that clash with js form attributes. Still don't properly handle the case where a control has name "elements", but at least throw a meaningful error.
 
-# 3.1.2
+### 3.1.2
 Bug fix in elementmerge - ensure that multiple consecutive nodes will be deleted if not present in new DOM (previously it would only delete the first removed node).
 
-# 3.1.1
+### 3.1.1
 `elementmerge.reload()` bug fix - keep query string
 
-# 3.1.0
+## 3.1.0
 `jsform_elementmerge.js` enhancements - `[elementmerge-whitelist]` directive, and global `elementmerge` object for usage without `jsform.js`. See README for jsform for details.
 
 # 3.0.0
