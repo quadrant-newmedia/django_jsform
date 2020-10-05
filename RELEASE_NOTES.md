@@ -1,5 +1,20 @@
-## 3.3.0
+## 3.6.0
 Add means of passing custom selectors to elementmerge.
+
+### 3.5.2
+elementmerge - don't `setAttribute()` if unchanged - was causing stylesheets to unapplied/reapplied, causing FOUC
+
+### 3.5.1 
+broken update - forgot to commit submodule
+
+## 3.5.0
+js_response module now generates responses which can be added together
+
+## 3.4.0
+Added new template ("inline_field.html") for rendering fields in one line
+
+## 3.3.0
+Updated jsform.js - add more properties to `jsformsuccess` and `jsformerror` events.
 
 ## 3.2.0
 Better template generation for single checkboxes

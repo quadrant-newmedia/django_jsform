@@ -7,8 +7,24 @@ from .templatetags.jsform import get_errormessage_id
 def d(text):
     return json.dumps(text)
 
+class JSResponse(http.HttpResponse):
+    '''
+        HttpResponse subclass that:
+            - sets correct content_type
+            - can be added together (to concatenate the javascript statements in each)
+    '''
+    def __init__(self, content):
+        self._string_content = content
+        super().__init__(content, content_type='text/javascript')
+    def __add__(self, other):
+        return JSResponse(';'.join([self._string_content, other._string_content]))
+
 def js_response(content):
-    return http.HttpResponse(content, content_type='text/javascript')
+    '''
+        Kept for backward compatibility.
+        Users might as well use JSResponse directly.
+    '''
+    return JSResponse(content)
 
 def reload():
     return js_response('location.reload()')
@@ -52,11 +68,19 @@ def replace_location(url):
         location.replace({d(url)});
     ''')
 
+def unblock_form():
+    return js_response('''form.removeAttribute('block-submissions')''')
+
+def _optional_unblock(unblock):
+    return unblock_form() if unblock else js_response('');
+
 def alert(message, allow_further_submissions=False):
     '''
         Useful for error messages that aren't really typical form error messages, or for actions that are triggered by a simple button push (where there is no corresponding container for error messages).
+
+        Note - allow_further_submissions is so-called for backward compatibility. In other functions, we've renamed it to "unblock".
     '''
-    return js_response(f'alert({d(message)}); return {d(allow_further_submissions)}')
+    return js_response(f'alert({d(message)});') + _optional_unblock(allow_further_submissions)
 
 def _get_script_content(script_name):
     with open(os.path.join(os.path.dirname(__file__), 'js_helpers', script_name)) as f :
@@ -71,40 +95,39 @@ def _get_script_content(script_name):
 
     Note that all of these functions return true, to allow further form submissions.
 '''
-def reset_form_inputs():
+def reset_form_inputs(unblock=True):
     '''
-        Resets form and returns true, to allow further submissions.
+        Resets form and unblocks forms
     '''
-    return js_response(f'form.reset(); return true')
+    return js_response(f'form.reset();')+_optional_unblock(unblock)
 
-def clear_form_errors():
+def clear_form_errors(unblock=True):
     '''
         Requires django
-        Resets form and returns true, to allow further submissions.
+        Resets and unblocks form.
     '''
     return js_response(f'''
         {_get_script_content("clear_form_errors.js")};
         clear_form_errors(form); 
-        return true
-    ''')
-def set_form_errors(form, status_code=400):
+    ''')+_optional_unblock(unblock)
+def set_form_errors(form, status_code=400, unblock=True):
     return set_raw_form_errors(
         form.non_field_errors(), 
         {get_errormessage_id(field): field.errors for field in form},
         status_code,
+        unblock=unblock,
     )
-def set_raw_form_errors(form_errors, error_map, status_code=400):
+def set_raw_form_errors(form_errors, error_map, status_code=400, unblock=True):
     r = js_response(f'''
         {_get_script_content("set_form_errors.js")};
         set_form_errors(form, {d(form_errors)}, {d(error_map)});
-        return true
-    ''')
+    ''')+_optional_unblock(unblock)
     r.status_code = status_code
     return r
 
-def reset_form():js_response(f'''
+def reset_form(unblock):
+    return js_response(f'''
         {_get_script_content("js_helpers/clear_form_errors.js")};
         clear_form_errors(form); 
         form.reset();
-        return true
-    ''')
+    ''')+_optional_unblock(unblock)
