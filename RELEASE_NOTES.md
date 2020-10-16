@@ -1,3 +1,6 @@
+### 3.6.1
+Changed `.block` css -> setting left/right margin to 'auto' has no effect on any layout _we_ create, but can cause problems if users are using this class for other layouts on their sites. No longer set left/right margin at all.
+
 ## 3.6.0
 Add means of passing custom selectors to elementmerge.
 
