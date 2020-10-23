@@ -125,9 +125,9 @@ def set_raw_form_errors(form_errors, error_map, status_code=400, unblock=True):
     r.status_code = status_code
     return r
 
-def reset_form(unblock):
+def reset_form(unblock=True):
     return js_response(f'''
-        {_get_script_content("js_helpers/clear_form_errors.js")};
+        {_get_script_content("clear_form_errors.js")};
         clear_form_errors(form); 
         form.reset();
     ''')+_optional_unblock(unblock)

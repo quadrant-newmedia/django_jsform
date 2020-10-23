@@ -1,3 +1,6 @@
+### 3.6.2
+`js_response.reset_form()` bug fix (and default `unblock_form` to True)
+
 ### 3.6.1
 Changed `.block` css -> setting left/right margin to 'auto' has no effect on any layout _we_ create, but can cause problems if users are using this class for other layouts on their sites. No longer set left/right margin at all.
 

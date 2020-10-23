@@ -20,4 +20,8 @@ def execresponse_test(request):
         r.status_code = 400
         return r
 
+    # TODO - test each method from js_response?
+    if action == 'RESET':
+        return js_response.reset_form()
+
     return http.HttpResponseBadRequest()
