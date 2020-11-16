@@ -24,4 +24,7 @@ def execresponse_test(request):
     if action == 'RESET':
         return js_response.reset_form()
 
+    if action == 'SUBMITTING_BUTTON_TEST':
+        return js_response.JSResponse('alert(submitting_button.innerText);') + js_response.unblock_form()
+
     return http.HttpResponseBadRequest()

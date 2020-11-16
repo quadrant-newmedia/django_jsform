@@ -1,3 +1,6 @@
+## 3.7
+Give event handlers and execresponse access to `submitting_button`.
+
 ### 3.6.2
 `js_response.reset_form()` bug fix (and default `unblock_form` to True)
 
