@@ -80,6 +80,15 @@
         <button onclick="elementmerge.reload();">Merge normal</button>
     </div>
 
+    <h3><code>elementmergecomplete</code> Event</h3>
+    <p>Click the below button,  and you should get an alert.</p>
+    <div>
+        <button onclick="
+            function onmerge(event) {alert(event); document.removeEventListener('elementmergecomplete', onmerge)};
+            document.addEventListener('elementmergecomplete', onmerge);
+            elementmerge.reload();
+            ">Merge, and listen for complete</button>
+    </div>
 
 </body>
 </html>

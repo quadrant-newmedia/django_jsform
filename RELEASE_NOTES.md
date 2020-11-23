@@ -1,3 +1,6 @@
+## 3.8.0
+elementmerge - fire `elementmergecomplete` event when done.
+
 ## 3.7
 Give event handlers and execresponse access to `submitting_button`.
 
