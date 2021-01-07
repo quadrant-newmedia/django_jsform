@@ -1,3 +1,6 @@
+## 3.9.0
+elementmerge - add `elementmerge-replace` option
+
 ## 3.8.0
 elementmerge - fire `elementmergecomplete` event when done.
 
