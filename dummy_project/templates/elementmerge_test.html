@@ -52,7 +52,7 @@
         <button type=submit name=whitelist value=true>You can also submit test by submitting this form.</button>
     </form>
 
-    <h3>Deleting Removed Elements</h3>
+    <h2>Deleting Removed Elements</h2>
     <template id="delete-template">
         <p>This element was added dynamically.</p>
         <p>So was this one. Both should be deleted when you merge the page.</p>
@@ -63,7 +63,7 @@
         document.getElementById('delete-container').appendChild(document.getElementById('delete-template').content);
     </script>
 
-    <h3>Custom Merge Options</h3>
+    <h2>Custom Merge Options</h2>
     <p>Last merge: {{result}}</p>
     <p id="custom-merge-whitelist">A: {{result}}</p>
     <template id="custom-merge-options">
@@ -80,7 +80,7 @@
         <button onclick="elementmerge.reload();">Merge normal</button>
     </div>
 
-    <h3><code>elementmergecomplete</code> Event</h3>
+    <h2><code>elementmergecomplete</code> Event</h2>
     <p>Click the below button,  and you should get an alert.</p>
     <div>
         <button onclick="
@@ -89,6 +89,13 @@
             elementmerge.reload();
             ">Merge, and listen for complete</button>
     </div>
+
+    <h2><code>elementmerge-replace</code></h2>
+    <p>
+        <label><input type="checkbox" name=""> Click me.</label><br>
+        <label><input type="checkbox" name="" elementmerge-replace> And click me.</label><br>
+        Then <button type=button onclick="elementmerge.reload();">click me</button>. The first checkbox should remain checked, but the second should not (since it has <code>elementmerge-replace</code>, the element is completely replaced, and its state is lost).
+    </p>
 
 </body>
 </html>
