@@ -5,6 +5,7 @@
     <title>jsform_execresponse tests</title>
     <script defer src="{% static "jsform/jsform.js" %}"></script>
     <script defer src="{% static "jsform/jsform_execresponse.js" %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static "django_jsform/django_jsform.css" %}">
     <style>
         [block-submissions] {
             opacity: 0.5;
@@ -56,5 +57,7 @@
         <button>A</button> <button>B</button>
     </form>
 
+    <h2>Error messages and focusing</h2>
+    {% include "django_jsform/complete_form.html" %}
 </body>
 </html>

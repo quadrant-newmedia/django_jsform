@@ -73,6 +73,13 @@ def unblock_form():
 
 def _optional_unblock(unblock):
     return unblock_form() if unblock else js_response('');
+def _optional(possible_js_response):
+    '''
+        Helper function which makes it easier to (conditionally) add different JSResponse objects together
+    '''
+    if (possible_js_response) :
+        return possible_js_response
+    return JSResponse('');
 
 def alert(message, allow_further_submissions=False):
     '''
@@ -94,17 +101,12 @@ def _get_script_content(script_name):
     In particular circumstances, you may find it easier to mutate the form directly, and you can use these.
 
     Note that all of these functions return true, to allow further form submissions.
-
-    TODO - now that set_form_errors uses status code 400 by default, jsform_focus_error_element will have no effect (it only listens to jsformsuccess events). Should we invoke the error-element focusing explicitly from set_form_errors? In addition to the general success handler?
-
-    Ideally, you'd have to explicitly invoke the error element focusing (or at least have means to turn it off), even when using element merge. Perhaps we should provide an explicit elementmerge(string_or_httpresponse) method, so you can combine calls to elementmerge with other things (like focusing error elements).
 '''
 def reset_form_inputs(unblock=True):
     '''
         Resets form and unblocks forms
     '''
     return js_response(f'form.reset();')+_optional_unblock(unblock)
-
 def clear_form_errors(unblock=True):
     '''
         Requires django
@@ -114,20 +116,26 @@ def clear_form_errors(unblock=True):
         {_get_script_content("clear_form_errors.js")};
         clear_form_errors(form); 
     ''')+_optional_unblock(unblock)
-def set_form_errors(form, status_code=400, unblock=True):
+def set_form_errors(form, status_code=400, unblock=True, focus_errors=True):
     return set_raw_form_errors(
         form.non_field_errors(), 
         {get_errormessage_id(field): field.errors for field in form},
         status_code,
         unblock=unblock,
+        focus_errors=focus_errors,
     )
-def set_raw_form_errors(form_errors, error_map, status_code=400, unblock=True):
+def set_raw_form_errors(form_errors, error_map, status_code=400, unblock=True, focus_errors=True):
     r = js_response(f'''
         {_get_script_content("set_form_errors.js")};
         set_form_errors(form, {d(form_errors)}, {d(error_map)});
-    ''')+_optional_unblock(unblock)
+    ''')+_optional_unblock(unblock)+_optional(focus_errors and focus_form_errors());
     r.status_code = status_code
     return r
+def focus_form_errors():
+    return js_response(f'''
+        {_get_script_content("focus_form_errors.js")};
+        focus_form_errors(form);
+    ''')
 
 def reset_form(unblock=True):
     return js_response(f'''

@@ -1,11 +1,26 @@
-from django import http
+from django import forms, http
 from django.template.response import TemplateResponse
 
 from django_jsform import js_response
 
+class Form(forms.Form):
+    name = forms.CharField()
+
+    def clean(self):
+        if self.cleaned_data.get('name') :
+            self.add_error(None, 'This is a fake form-level error')
+
 def execresponse_test(request):
+    # The "error message" form at the bottom is the only one that uses POST
+    # This really should go on its own page
+    if request.method == 'POST' :
+        form = Form(request.POST)
+        if not form.is_valid():
+            return js_response.set_form_errors(form)
+        return js_response.alert('success')
+
     if 'ACTION' not in request.GET :
-        return TemplateResponse(request, 'execresponse_tests.html', {})
+        return TemplateResponse(request, 'execresponse_tests.html', {'form': Form()})
 
     action = request.GET['ACTION']
 
@@ -28,3 +43,5 @@ def execresponse_test(request):
         return js_response.JSResponse('alert(submitting_button.innerText);') + js_response.unblock_form()
 
     return http.HttpResponseBadRequest()
+
+

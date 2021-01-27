@@ -1,3 +1,8 @@
+## 3.10.0
+`js_response.set_form_errors()` now focuses the first "error element" in the form. 
+
+This was always the intended behaviour (at least, when using jsform_focus_error_element.js), but since `set_form_errors` was updated to use status code of 400 by default, jsform_focus_error_element.js has no effect.
+
 ## 3.9.0
 elementmerge - add `elementmerge-replace` option
 

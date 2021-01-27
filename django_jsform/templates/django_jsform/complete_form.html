@@ -4,7 +4,7 @@
 
 {# Note - we think our error messages are friendlier than browser default error messages, so we set novalidate #}
 <form novalidate method="POST" class="limited-width-form" target="jsform">{% csrf_token %}
-    <div class="block error" data-form-errors aria-live="polite"></div>
+    <div class="block error" data-form-errors aria-live="polite" tabindex="-1"></div>
     <div class="wide-inputs">
 		{% include 'django_jsform/form_fields.html' %}	
     </div>
