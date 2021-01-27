@@ -94,6 +94,10 @@ def _get_script_content(script_name):
     In particular circumstances, you may find it easier to mutate the form directly, and you can use these.
 
     Note that all of these functions return true, to allow further form submissions.
+
+    TODO - now that set_form_errors uses status code 400 by default, jsform_focus_error_element will have no effect (it only listens to jsformsuccess events). Should we invoke the error-element focusing explicitly from set_form_errors? In addition to the general success handler?
+
+    Ideally, you'd have to explicitly invoke the error element focusing (or at least have means to turn it off), even when using element merge. Perhaps we should provide an explicit elementmerge(string_or_httpresponse) method, so you can combine calls to elementmerge with other things (like focusing error elements).
 '''
 def reset_form_inputs(unblock=True):
     '''
