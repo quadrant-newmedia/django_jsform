@@ -80,6 +80,19 @@
         <button onclick="elementmerge.reload();">Merge normal</button>
     </div>
 
+    <details open>
+        <summary>Test</summary>
+        Test content
+    </details>
+    <details>
+        <summary><code>ignoreattrs</code></summary>
+        <p>You can use the <code>ignoreattrs</code> option to prevent certain attributes from being merged. This is useful for attributes that represent user-controlled state.
+            <button onclick="elementmerge.reload({ignoreattrs: {open: 'details'}})">This button won't close the details element</button>
+            <button onclick='elementmerge.reload()'>But this one will</button>
+        </p>
+
+    </details>
+
     <h2><code>elementmergecomplete</code> Event</h2>
     <p>Click the below button,  and you should get an alert.</p>
     <div>

@@ -1,3 +1,6 @@
+## 3.11.0
+Added `ignoreattrs` option to elementmerge
+
 ## 3.10.0
 `js_response.set_form_errors()` now focuses the first "error element" in the form. 
 
