@@ -1,3 +1,6 @@
+### 3.11.1
+jsform bug fix
+
 ## 3.11.0
 Added `ignoreattrs` option to elementmerge
 
