@@ -31,14 +31,30 @@
     <h2>Submission Blocking</h2>
     <form target="jsform">
         <p>
-            This form (like most on this page) can only be submitted once. <br>
+            This form uses the default success/error/networkerror actions.
+        </p>
+        <p>
+            This button is a GET submission, which will succeed. The form will "unblock" after the success message.
             <input type="submit" value="Submit">
         </p>
+        <p>
+            This button causes a POST submission, which will fail. The form will "unblock" after the error message.
+            <input type="submit" value="Submit" formmethod="POST">
+        </p>
+        {% comment %}
+            Doesn't work - causes 404, not network error. Don't know how to force network error.
+            Should we enable this, with instructions for user to disable internet connection?
+        <p>
+            This button causes a POST submission to invalid domain, which will cause a network error. The form will NOT unblock.
+            <input type="submit" value="Submit" formmethod="POST" formaction="http://fakedomainthatisntrealaffffffffffffffffafagagakjo">
+        </p>
+        {% endcomment %}
+        {# TODO - add tests to verify other method/result combos #}
     </form>
     <!-- Note - clear attribute after timeout, so that jsform runs first (we need to wait until it adds the attribute) -->
     <form target="jsform" allow-duplicate-submissions>
         <p>
-            This form clears the <code>block-submissions</code> attribute, so it can be submitted more than once. <br>
+            This form clears the <code>block-submissions</code> attribute on <code>jsformsubmitted</code>. You'll notice the submit button become "renabled" immediately, even before you dismiss the success message alert.<br>
             <input type="submit" value="Submit">
         </p>
     </form>

@@ -1,3 +1,8 @@
+# 4.0.0
+jsform update - change default actions of `jsformsuccess`, `jsformerror`, `jsformnetworkerror`  - unblock form when it's deemed "safe". `jsformerror` always unblocks form, `jsformsuccess` and `jsformnetworkerror` only unblock on GET.
+
+Technically, this is a breaking change, but most users should be happy with the change, and won't require any code changes.
+
 ### 3.11.1
 jsform bug fix
 
