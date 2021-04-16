@@ -8,6 +8,11 @@
     <script defer src="{% static "jsform/jsform_elementmerge.js" %}"></script>
 </head>
 <body>
+    <style type="text/css">
+        /* for IE */
+        template {display: none;}
+    </style>
+
     <p>
         Note - this page does <b>NOT</b> represent any common/recommended UI pattern. Here we are only testing that elementmerge behaves as expected.
     </p>
@@ -60,7 +65,7 @@
     </template>
     <div id="delete-container"></div>
     <script>
-        document.getElementById('delete-container').appendChild(document.getElementById('delete-template').content);
+        document.getElementById('delete-container').innerHTML = document.getElementById('delete-template').innerHTML;
     </script>
 
     <h2>Custom Merge Options</h2>
@@ -71,7 +76,7 @@
     </template>
     <div id="custom-merge-container"></div>
     <script>
-        document.getElementById('custom-merge-container').appendChild(document.getElementById('custom-merge-options').content);
+        document.getElementById('custom-merge-container').innerHTML = document.getElementById('custom-merge-options').innerHTML;
     </script>
     <p>{{result}}</p>
     <div>
@@ -109,6 +114,23 @@
         <label><input type="checkbox" name="" elementmerge-replace> And click me.</label><br>
         Then <button type=button onclick="elementmerge.reload();">click me</button>. The first checkbox should remain checked, but the second should not (since it has <code>elementmerge-replace</code>, the element is completely replaced, and its state is lost).
     </p>
+
+
+    <h2>Forms - Don't Erase User Data</h2>
+    <p>The inputs below do not get submitted to server. Still, <code>elementmerge.reload()</code> should NOT clear their values/state. Try changing values, then click reload, and verify that nothing gets cleared.</p>
+    <form>
+        <input type="" name=""><br>
+        <input type="checkbox" name=""><br>
+        <select>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+        </select><br>
+        <textarea>Initial Text</textarea><br>
+        <textarea></textarea><br>
+        <input type="file" name=""><br>
+        <button type="button" onclick='elementmerge.reload()'>Reload</button>
+    </form>
 
 </body>
 </html>

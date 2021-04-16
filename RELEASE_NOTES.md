@@ -1,3 +1,6 @@
+# 4.0.1
+elementmerge IE bug work-around. Never merge textarea children (because that changes the element's value in IE).
+
 # 4.0.0
 jsform update - change default actions of `jsformsuccess`, `jsformerror`, `jsformnetworkerror`  - unblock form when it's deemed "safe". `jsformerror` always unblocks form, `jsformsuccess` and `jsformnetworkerror` only unblock on GET.
 
