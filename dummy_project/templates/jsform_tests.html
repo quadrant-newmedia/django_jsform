@@ -190,10 +190,24 @@
 
     <h2>Form With Input Named "elements"</h2>
     <p>This form has an input named "elements". We can't handle this properly (for GET requests), so throw an error with a meaningful message. Try submitting the form, and ensure the console has an appropriate message.</p>
-    <p>It should alert a success message on submission.</p>
     <form target="jsform">{% csrf_token %}
         <input type="hidden" name="elements" value="foo">
         <input type="submit" value="Submit">
+    </form>
+
+    <h2><code>formtarget</code> Support</h2>
+    <form target="jsform" action="/200/">
+        <p>This form uses jsform. A is a normal button - pressing it should trigger an alert.</p>
+        <button>A</button>
+        <p>B has formtarget=_self set. It should load an empty page in the current tab.</p>
+        <button formtarget="_self">B</button>
+    </form>
+
+    <form action="/200/">
+        <p>This form does not use jsform. A is a normal button - pressing it should load an empty page in the current tab.</p>
+        <button>A</button>
+        <p>B has formtarget=jsform. It should trigger an alert.</p>
+        <button formtarget="jsform">B</button>
     </form>
 </body>
 </html>

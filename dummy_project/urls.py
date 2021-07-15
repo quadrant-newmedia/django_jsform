@@ -1,3 +1,4 @@
+from django import http
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
@@ -18,6 +19,8 @@ def import_view(module, view_name='view', package_name=__package__):
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name='index.html')),
+
+    path('200/', lambda r: http.HttpResponse()),
 
     # This is a test of our templates, and their usage with set_form_errors
     # For live "playground" type testing

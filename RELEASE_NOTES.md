@@ -1,3 +1,6 @@
+# 4.1.0
+Support `formtarget` on submit buttons, so you can opt-in or opt-out of jsform per-button.
+
 # 4.0.1
 elementmerge IE bug work-around. Never merge textarea children (because that changes the element's value in IE).
 
