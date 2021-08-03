@@ -1,3 +1,6 @@
+## 4.2.1
+Officially support Django 3.2
+
 # 4.2.0
 Set `X-Requested-With` HTTP header to `jsform`
 

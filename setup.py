@@ -22,6 +22,6 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.6',
-    install_requires=["Django>=2.2,<3.1"],
+    install_requires=["Django>=2.2,<3.3"],
     include_package_data=True,
 )
