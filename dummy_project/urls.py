@@ -39,4 +39,5 @@ urlpatterns = [
 
     path('filter_form/', filter_form),
     path('verify_attrs/', import_view('.verify_attrs')),
+    path('check_x_requested_with/', import_view('.check_x_requested_with')),
 ]

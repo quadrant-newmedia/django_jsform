@@ -1,3 +1,6 @@
+# 4.2.0
+Set `X-Requested-With` HTTP header to `jsform`
+
 # 4.1.0
 Support `formtarget` on submit buttons, so you can opt-in or opt-out of jsform per-button.
 
