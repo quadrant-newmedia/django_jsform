@@ -10,7 +10,7 @@ from django.utils.safestring import mark_safe
 register = template.Library()
 
 def get_errormessage_id(bound_field):
-    return f'error-{bound_field.form.prefix}-{bound_field.name}'
+    return f'error-{bound_field.html_name}'
 def _add_widget_attr(bound_field, name, value):
     _as_widget = bound_field.as_widget
     def as_widget(widget=None, attrs=None, only_initial=False):

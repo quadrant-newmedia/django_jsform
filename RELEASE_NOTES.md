@@ -1,3 +1,9 @@
+## 4.3.0
+
+Updated get-error-message-id, so that output can more easily be replicated if all you know is the html input's name attribute.
+
+This _may_ break some things if you were previously manually recreating the format of our error message containers.
+
 ## 4.2.1
 Officially support Django 3.2
 
@@ -47,7 +53,7 @@ Add means of passing custom selectors to elementmerge.
 ### 3.5.2
 elementmerge - don't `setAttribute()` if unchanged - was causing stylesheets to unapplied/reapplied, causing FOUC
 
-### 3.5.1 
+### 3.5.1
 broken update - forgot to commit submodule
 
 ## 3.5.0
