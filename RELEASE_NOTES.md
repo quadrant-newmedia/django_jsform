@@ -1,3 +1,11 @@
+# 5.0.0
+Ensure that non-GET forms are never empty (send a "__hack_ensure_body_not_empty__" key, with no value).
+This is to work-around browsers/firewalls/proxies that have issues with empty multipart/form-data POST requests.
+
+For most projects, this will be backward compatible with v4. 
+It's only an issue if your code has an issue with this extra value
+(ie. it checks for an "empty" data set, or does something with all keys in the data set).
+
 ## 4.3.0
 
 Updated get-error-message-id, so that output can more easily be replicated if all you know is the html input's name attribute.

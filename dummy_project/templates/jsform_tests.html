@@ -212,5 +212,19 @@
 
     <h2>X-Requested-With</h2>
     <form action='/check_x_requested_with/' target=jsform><input type="submit" name=""></form>
+
+    <h2>Non-empty Post Requests</h2>
+    <form id='post-empty' action='/echo_post/' target=jsform method=POST>
+        <button type='submit'>Submit this form</button>
+    </form>
+    <script>
+        document.getElementById('post-empty').addEventListener('jsformsuccess', function(e) {
+            var r = e.detail;
+            if (r.responseText == '__hack_ensure_body_not_empty__=') alert('Good ✔')
+            else alert('FAIL!')
+            e.preventDefault();
+        });
+    </script>
+
 </body>
 </html>
