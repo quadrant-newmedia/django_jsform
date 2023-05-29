@@ -3,6 +3,8 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
 
+from time import sleep
+
 from .form_test_view import FormTestView
 
 from . import simple_form
@@ -12,6 +14,13 @@ from .execresponse_test import execresponse_test
 from .elementmerge_test import elementmerge_test
 
 from .filter_form import filter_form
+
+def slow_echo_get(request):
+    sleep(1)
+    return http.HttpResponse(
+        request.GET.urlencode(),
+        content_type='text/plain'
+    )
 
 def import_view(module, view_name='view', package_name=__package__):
     from importlib import import_module
@@ -41,4 +50,5 @@ urlpatterns = [
     path('verify_attrs/', import_view('.verify_attrs')),
     path('check_x_requested_with/', import_view('.check_x_requested_with')),
     path('echo_post/', import_view('.echo_post')),
+    path('slow_echo_get/', slow_echo_get),
 ]

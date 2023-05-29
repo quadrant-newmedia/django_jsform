@@ -226,5 +226,18 @@
         });
     </script>
 
+    <h2>Allow Parallel Requests</h2>
+    <p>Click the submit button twice, quickly. You should receive a single alert, with a submission_number of 2.</p>
+    <form 
+        action='/slow_echo_get/' 
+        target=jsform 
+        onsubmit='i = this.elements.submission_number; i.value = parseInt(i.value)+1;'
+        onjsformsuccess='alert(event.detail.responseText); event.preventDefault();'
+        replace-overlapping-requests
+    >
+        <input type="hidden" name="submission_number" value="0">
+        <button type='submit'>Submit</button>
+    </form>
+
 </body>
 </html>

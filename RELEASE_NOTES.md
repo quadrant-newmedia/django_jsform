@@ -1,3 +1,6 @@
+## 5.1.0
+Add replace-overlapping-requests option to jsform.
+
 # 5.0.0
 Ensure that non-GET forms are never empty (send a "__hack_ensure_body_not_empty__" key, with no value).
 This is to work-around browsers/firewalls/proxies that have issues with empty multipart/form-data POST requests.
