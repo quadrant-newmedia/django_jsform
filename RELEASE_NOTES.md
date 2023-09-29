@@ -1,3 +1,6 @@
+## 5.2.0
+Added `elementmergeerrorresponse` event
+
 ## 5.1.0
 Add replace-overlapping-requests option to jsform.
 
