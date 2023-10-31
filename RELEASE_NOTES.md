@@ -1,3 +1,6 @@
+## 5.3.0
+Explicit django 4 support
+
 ## 5.2.0
 Added `elementmergeerrorresponse` event
 
