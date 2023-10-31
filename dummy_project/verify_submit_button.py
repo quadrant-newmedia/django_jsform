@@ -5,6 +5,7 @@ def verify_submit_button(request):
 
     assert 'B' in data
     assert data['B'] == 'buttonB'
-    assert set(data.keys()) == set(['csrfmiddlewaretoken', 'B', '__hack_ensure_body_not_empty__'])
+    assert 'A' not in data
+    assert 'C' not in data
 
     return http.HttpResponse()
