@@ -1,3 +1,6 @@
+## 5.4.0
+Added `jsformuploadprogress` event
+
 ## 5.3.0
 Explicit django 4 support
 
