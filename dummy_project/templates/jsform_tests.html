@@ -145,6 +145,19 @@
         <input type="submit" value="Submit">
     </form>
 
+    <h2>Upload Progress</h2>
+    <p id="progress-log"></p>
+    <p>The form should show the progress of the file upload.</p>
+    <form method="POST" target="jsform" allow-duplicate-submissions action="/verify_files/" id="upload-progress">{% csrf_token %}
+        <input type="file" multiple name="files"><br>
+        <input type="submit" value="Submit">
+    </form>
+    <script>
+        document.getElementById('upload-progress').addEventListener('jsformuploadprogress', function(e) {
+            document.getElementById('progress-log').innerText = `Uploaded ${((e.detail.loaded / e.detail.total) * 100).toFixed(2)}% (${e.detail.loaded} B of ${e.detail.total} B)`;
+        });
+    </script>
+
     <h2>Submit Button</h2>
     <p>Here we verify that the "submitting button" gets serialized, and that no others do. You should select the second button in each test. Each submission should alert a success response.</p>
 
