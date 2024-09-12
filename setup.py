@@ -23,7 +23,7 @@ setuptools.setup(
     ],
     python_requires=">=3.7",
     install_requires=[
-        "Django>=2.2,<5",
+        "Django>=3,<5",
         "html_generators>=2.8.0,<3",
     ],
     include_package_data=True,

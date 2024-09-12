@@ -146,7 +146,7 @@ def clear_form_errors(unblock: bool = True):
 
 
 def set_form_errors(
-    form: forms.Form,
+    form: forms.BaseForm,
     status_code: int = 400,
     unblock: bool = True,
     focus_errors: bool = True,

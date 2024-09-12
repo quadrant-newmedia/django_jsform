@@ -1,9 +1,13 @@
 from django.test import TestCase, override_settings
 
+
 # Sample - you can override any settings you require for your tests
 # @override_settings(ROOT_URLCONF='django_jsform.tests.urls')
 class MyTestCase(TestCase):
-    pass
+    def test_imports_cleanly(self):
+        from django_jsform import js_response
+        from django_jsform.templatetags import jsform
+
     # Samples:
     # def test_normal_path_before_dynamic_returns_correct_response(self):
     #     r = self.client.get('/path_before/')
