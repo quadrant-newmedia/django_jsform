@@ -1,3 +1,6 @@
+## 5.5.0
+Added type annotations
+
 ## 5.4.0
 Added `jsformuploadprogress` event
 

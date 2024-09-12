@@ -3,7 +3,7 @@ import setuptools
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-with open('VERSION', 'r') as fh:
+with open("VERSION", "r") as fh:
     version = fh.read()
 
 setuptools.setup(
@@ -15,13 +15,16 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/quadrant-newmedia/django_jsform",
-    packages=['django_jsform'],
+    packages=["django_jsform"],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    python_requires='>=3.6',
-    install_requires=["Django>=2.2,<5"],
+    python_requires=">=3.7",
+    install_requires=[
+        "Django>=2.2,<5",
+        "html_generators>=2.8.0,<3",
+    ],
     include_package_data=True,
 )
