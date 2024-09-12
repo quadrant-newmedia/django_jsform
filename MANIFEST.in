@@ -1,6 +1,7 @@
 include README.md
 include RELEASE_NOTES.md
 include VERSION
+include django_jsform/py.typed
 recursive-include django_jsform *.py
 recursive-include django_jsform/templates *
 recursive-include django_jsform/static *.js
