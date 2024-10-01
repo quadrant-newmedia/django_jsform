@@ -1,4 +1,4 @@
-from django.test import TestCase, override_settings
+# from django.test import TestCase, override_settings
 
 
 # Sample - you can override any settings you require for your tests

@@ -1,4 +1,14 @@
 {
     "typeCheckingMode": "strict",
-    "include": ["django_jsform/"]
+    "exclude": [
+        "**/node_modules", 
+        "**/__pycache__",
+        "**/.*",
+        "**/migrations",
+        "dummy_project/",
+        "venv"
+    ],
+    "reportUnusedImport": "warning",
+    "reportUnusedVariable": "warning",
+    "reportUnusedFunction": "warning"
 }
