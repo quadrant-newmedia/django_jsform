@@ -30,5 +30,17 @@ function focus_form_errors(form) {
     }
 
     var ft = get_item_to_focus();
-    ft && ft.focus();
+
+    function closest_exclusive(element, selector) {
+        if (!element.parentElement) return null
+        return element.parentElement.closest(selector)
+    }
+    if (ft) {
+        let cursor = ft;
+        // if target element is inside any <details> ancestors, open them all
+        while (cursor=closest_exclusive(cursor, 'details')) {
+            if (!cursor.open) cursor.open = true
+        }
+        ft.focus();
+    }
 }
