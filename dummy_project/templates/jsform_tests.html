@@ -252,5 +252,31 @@
         <button type='submit'>Submit</button>
     </form>
 
+    <!--
+        forms submit an ORDERED list of key-value pairs
+        https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#constructing-the-form-data-set
+        make sure our serialization matches how browsers would natively serialize the form
+    -->
+    <h2>Preserving Input Order</h2>
+    <button type="submit" form="order-preservation-test-form" name="submitter" value="foo">Submit</button>
+    <form 
+        target="jsform"
+        id="order-preservation-test-form"
+        action="does_not_exist"
+        onjsformerror="
+            event.preventDefault()
+
+            var query = event.detail.jsform_data.query
+            var expected_data = new FormData(this, this.elements.submitter)
+            var expected_query = new URLSearchParams(expected_data).toString()
+
+            if (query == expected_query) alert('test passed ✓')
+            else alert('ERROR! expected:\n'+expected_query+'\n but actually generated:\n'+query)
+        "
+    >
+        <input name="a" value="a" type="hidden">
+        <input name="b" value="b" type="hidden">
+    </form>
+
 </body>
 </html>

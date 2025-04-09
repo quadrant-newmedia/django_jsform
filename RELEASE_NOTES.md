@@ -1,3 +1,6 @@
+### 5.7.1
+Ensure that form elements get serialized in the correct order, for backend applications that care about order.
+
 ### 5.7.0
 focus_form_errors() -> auto-expand any `<details>` elements that contain the input-to-be-focused
 
